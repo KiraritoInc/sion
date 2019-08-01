@@ -18,6 +18,7 @@ abstract class AbstractController
   protected $_body;
   protected $_sendTime;
   protected $_updateTime;
+  protected $_appType;
 
   protected function __construct($receive)
   {
@@ -39,6 +40,9 @@ abstract class AbstractController
 
     // それぞれの値を保存する（ログとして）
     $id = $this->_addLog();
+
+    // appTypeを保持しておく
+    $this->_appType = Config::$environment['app_type'];
   }
 
   // ログとして受け取ったデータを保存しておく

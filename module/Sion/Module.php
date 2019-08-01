@@ -2,6 +2,7 @@
 namespace Sion;
 
 use Sion\Controller\IndexController;
+use Sion\Controller\BatchController;
 
 Class Module
 {
@@ -30,5 +31,14 @@ Class Module
     // コントローラー実行
     $indexController = new IndexController($this->_receive);
     $indexController->indexAction();
+  }
+
+  public function batchRun($action)
+  {
+    $actionName = $action. 'Action';
+
+    // コントローラー実行
+    $indexController = new BatchController();
+    $indexController->$actionName();
   }
 }
