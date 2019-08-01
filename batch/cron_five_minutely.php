@@ -10,4 +10,4 @@ spl_autoload_register(function ($className) {
 
 // 実行！
 $module = new Sion\Module();
-$module->batchRun('daily');
+$module->batchRun('fiveMinutely');

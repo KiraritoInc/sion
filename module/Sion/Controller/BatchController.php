@@ -39,13 +39,19 @@ class BatchController extends AbstractController
   }
 
   /**
+   * ５分に一回実行される処理
+   */
+  public function fiveMinutelyAction()
+  {
+    // WEBサイトをチェックする
+    $this->_checkWebSites();
+  }
+
+  /**
    * 一日に一回実行される処理
    */
   public function dailyAction()
   {
-    // WEBサイトをチェックする
-    $this->_checkWebSites();
-
     // SSLの日数をチェックする
     $this->_checkSSL();
   }
