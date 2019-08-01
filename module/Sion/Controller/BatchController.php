@@ -10,7 +10,7 @@ class BatchController extends AbstractController
 
   const ALERT_BEFORE_EXPIRE_DAY = 20; // SSLの有効期限切れ前にアラートを出す日数
 
-  const ERROR_MSG_WEB = "[toall]\n%sのWEBアクセスができません。\n至急WEBサイトを確認してください";
+  const ERROR_MSG_WEB = "[toall]\n%sのWEBアクセスができません。\n至急WEBサイトを確認してください！";
   const ERROR_MSG_SSL = "[toall]\n%sのSSL証明書の有効期限が残り%d日を切りました。\n証明書が更新されていませんので確認してください！";
 
   private $webCheckUrls = [
