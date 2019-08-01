@@ -14,15 +14,16 @@ class BatchController extends AbstractController
   const ERROR_MSG_SSL = "[toall]\n%sのSSL証明書の有効期限が残り%d日を切りました。\n証明書が更新されていませんので確認してください！";
 
   private $webCheckUrls = [
-    'https://gbox.art/',
-    'https://www.gbox.art/application/index/login/',
-    'http://dragon.sc/login/form/',
-    'http://graphicker.me/',
-    'http://kirarito.co.jp/',
-    'http://kirarito.co.jp/en/',
-    'http://kirarito.co.jp/lpa/',
-    'http://kirarito.co.jp/lpb/',
-    'http://futarigurashi.kirarito.co.jp/index/',
+    ['url' => 'https://gbox.art/', 'http_code' => 200],
+    ['url' => 'https://www.gbox.art/application/index/login/', 'http_code' => 200],
+    ['url' => 'http://dragon.sc/login/form/', 'http_code' => 200],
+    ['url' => 'http://graphicker.me/', 'http_code' => 200],
+    ['url' => 'http://kirarito.co.jp/', 'http_code' => 200],
+    ['url' => 'http://kirarito.co.jp/en/', 'http_code' => 200],
+    ['url' => 'http://kirarito.co.jp/lpa/', 'http_code' => 200],
+    ['url' => 'http://kirarito.co.jp/lpb/', 'http_code' => 200],
+    ['url' => 'http://futarigurashi.kirarito.co.jp/index/', 'http_code' => 200],
+    ['url' => 'https://www2.dragon.sc/', 'http_code' => 301],
   ];
 
   private $sslDomains = [
@@ -30,6 +31,7 @@ class BatchController extends AbstractController
     ['check_domain' => 'www.gbox.art', 'ssl_domain' => 'www.gbox.art'],
     ['check_domain' => 'mysql.gbox.art', 'ssl_domain' => 'mysql.gbox.art'],
     ['check_domain' => 'test1.gbox.art', 'ssl_domain' => '*.gbox.art'],
+    ['check_domain' => 'www2.dragon.sc', 'ssl_domain' => 'www2.dragon.sc'],
   ];
 
   public function __construct()
@@ -79,18 +81,18 @@ class BatchController extends AbstractController
   {
     $roomId = $this->_getRoomId();
 
-    foreach ($this->webCheckUrls as $url) {
-      $status = $this->_webAccess($url);
+    foreach ($this->webCheckUrls as $row) {
+      $status = $this->_webAccess($row['url'], $row['http_code']);
       if (!$status) {
         // チェックが通らなかった場合、エラーメッセージを送る
-        $errorMsg = sprintf(self::ERROR_MSG_WEB, $url);
+        $errorMsg = sprintf(self::ERROR_MSG_WEB, $row['url']);
         $this->_response($roomId, $errorMsg);
       }
     }
   }
 
   // WEBサイトの生存確認
-  private function _webAccess($url)
+  private function _webAccess($url, $httpCode)
   {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url); // URLを指定する
@@ -107,7 +109,7 @@ class BatchController extends AbstractController
     }
 
     $status = false;
-    if ($info['http_code'] == 200) {
+    if ($info['http_code'] == $httpCode) {
       $status = true;
     } else {
       if ($this->_appType == Config::APP_TYPE_LOCAL) {
