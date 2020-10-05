@@ -23,7 +23,7 @@ class BatchController extends AbstractController
     ['url' => 'http://kirarito.co.jp/lpa/', 'http_code' => 200],
     ['url' => 'http://kirarito.co.jp/lpb/', 'http_code' => 200],
     ['url' => 'http://futarigurashi.kirarito.co.jp/index/', 'http_code' => 200],
-    ['url' => 'https://www2.dragon.sc/', 'http_code' => 301],
+//    ['url' => 'https://www2.dragon.sc/', 'http_code' => 301],
   ];
 
   private $sslDomains = [
@@ -31,7 +31,7 @@ class BatchController extends AbstractController
     ['check_domain' => 'www.gbox.art', 'ssl_domain' => 'www.gbox.art'],
     ['check_domain' => 'mysql.gbox.art', 'ssl_domain' => 'mysql.gbox.art'],
     ['check_domain' => 'test1.gbox.art', 'ssl_domain' => '*.gbox.art'],
-    ['check_domain' => 'www2.dragon.sc', 'ssl_domain' => 'www2.dragon.sc'],
+//    ['check_domain' => 'www2.dragon.sc', 'ssl_domain' => 'www2.dragon.sc'],
   ];
 
   public function __construct()
