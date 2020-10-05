@@ -17,7 +17,7 @@ class BatchController extends AbstractController
     ['url' => 'https://gbox.art/', 'http_code' => 200],
     ['url' => 'https://www.gbox.art/application/index/login/', 'http_code' => 200],
     ['url' => 'http://dragon.sc/login/form/', 'http_code' => 200],
-    ['url' => 'http://graphicker.me/', 'http_code' => 200],
+//    ['url' => 'http://graphicker.me/', 'http_code' => 200],
     ['url' => 'http://kirarito.co.jp/', 'http_code' => 200],
     ['url' => 'http://kirarito.co.jp/en/', 'http_code' => 200],
     ['url' => 'http://kirarito.co.jp/lpa/', 'http_code' => 200],
